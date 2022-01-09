@@ -6,9 +6,6 @@ class TransactionForm extends StatelessWidget {
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
 
-  void _handleSubmit() => _onSubmit(
-      {'name': _nameController.text, 'amount': _amountController.text});
-
   TransactionForm(this._onSubmit);
 
   @override
@@ -29,7 +26,9 @@ class TransactionForm extends StatelessWidget {
               controller: _amountController,
             ),
             TextButton(
-                onPressed: _handleSubmit, child: Text('Tambah pengeluaran'))
+                onPressed: () => _onSubmit(
+                    _nameController.text, double.parse(_amountController.text)),
+                child: Text('Tambah pengeluaran'))
           ],
         ),
       ),

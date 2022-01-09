@@ -17,17 +17,52 @@ class _TransactionContainerState extends State<TransactionContainer> {
         name: 'Pay telkom administrator',
         amount: 400000,
         date: DateTime.now()),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 400000,
+        date: DateTime.now()),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 400000,
+        date: DateTime.now()),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 400000,
+        date: DateTime.now()),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 400000,
+        date: DateTime.now()),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 400000,
+        date: DateTime.now()),
   ];
 
-  void handleCreateTransaction(data) {
-    print(data);
+  void _createTransaction(String name, double amount) {
+    if (name.isEmpty && amount is String && amount <= 0) return;
+
+    final newTransaction = Transaction(
+        id: transactions.length + 1,
+        name: name,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      transactions.add(newTransaction);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionForm(handleCreateTransaction),
+        TransactionForm(_createTransaction),
         TransactionList(transactions),
       ],
     );

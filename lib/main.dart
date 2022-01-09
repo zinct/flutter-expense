@@ -14,14 +14,14 @@ class App extends StatelessWidget {
           ),
           body: Column(
             children: [
-              Card(
-                color: Colors.amber,
-                child: Container(
-                  width: double.infinity,
-                  height: 100,
-                  child: Text('Chart'),
-                ),
-              ),
+              // Card(
+              //   color: Colors.amber,
+              //   child: Container(
+              //     width: double.infinity,
+              //     height: 100,
+              //     child: Text('Chart'),
+              //   ),
+              // ),
               TransactionContainer(),
             ],
           )),
