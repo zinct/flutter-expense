@@ -1,16 +1,90 @@
+import 'package:expense/model/transaction.dart';
+import 'package:expense/transaction/transaction_form.dart';
+import 'package:expense/transaction/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'package:expense/transaction/transaction_container.dart';
 
 void main() => runApp(App());
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  final List<Transaction> transactions = [
+    Transaction(
+        id: 1, name: 'Bought Ice cream', amount: 5000, date: DateTime.now()),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 400000,
+        date: DateTime.now()),
+    // Transaction(
+    //     id: 2,
+    //     name: 'Pay telkom administrator',
+    //     amount: 400000,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: 2,
+    //     name: 'Pay telkom administrator',
+    //     amount: 400000,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: 2,
+    //     name: 'Pay telkom administrator',
+    //     amount: 400000,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: 2,
+    //     name: 'Pay telkom administrator',
+    //     amount: 400000,
+    //     date: DateTime.now()),
+    // Transaction(
+    //     id: 2,
+    //     name: 'Pay telkom administrator',
+    //     amount: 400000,
+    //     date: DateTime.now()),
+  ];
+
+  void _openCreateTransactionModal(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (bCtx) {
+          return Container(
+            child: TransactionForm(_createTransaction),
+          );
+        });
+  }
+
+  void _createTransaction(String name, double amount) {
+    if (name.isEmpty && amount is String && amount <= 0) return;
+
+    final newTransaction = Transaction(
+        id: transactions.length + 1,
+        name: name,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      transactions.add(newTransaction);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Expense App',
-      home: Scaffold(
+      home: Builder(builder: (context) {
+        return Scaffold(
           appBar: AppBar(
             title: const Text('Expense APP'),
+            actions: [
+              IconButton(
+                  onPressed: () => _openCreateTransactionModal(context),
+                  icon: Icon(Icons.add))
+            ],
           ),
           body: Column(
             children: [
@@ -22,9 +96,17 @@ class App extends StatelessWidget {
               //     child: Text('Chart'),
               //   ),
               // ),
-              TransactionContainer(),
+              TransactionList(transactions),
             ],
-          )),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => _openCreateTransactionModal(context),
+          ),
+        );
+      }),
     );
   }
 }
