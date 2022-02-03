@@ -1,6 +1,7 @@
 import 'package:expense/model/transaction.dart';
 import 'package:expense/transaction/transaction_form.dart';
 import 'package:expense/transaction/transaction_list.dart';
+import 'package:expense/widgets/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:expense/transaction/transaction_container.dart';
 
@@ -13,13 +14,13 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final List<Transaction> transactions = [
-    Transaction(
-        id: 1, name: 'Bought Ice cream', amount: 45.01, date: DateTime.now()),
-    Transaction(
-        id: 2,
-        name: 'Pay telkom administrator',
-        amount: 99.95,
-        date: DateTime.now()),
+    // Transaction(
+    //     id: 1, name: 'Bought Ice cream', amount: 45.01, date: DateTime.now()),
+    // Transaction(
+    //     id: 2,
+    //     name: 'Pay telkom administrator',
+    //     amount: 99.95,
+    //     date: DateTime.now()),
     // Transaction(
     //     id: 2,
     //     name: 'Pay telkom administrator',
