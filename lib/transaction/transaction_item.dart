@@ -16,10 +16,13 @@ class TransactionItem extends StatelessWidget {
           margin: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.purple, width: 1.5)),
+              border: Border.all(
+                  color: Theme.of(context).primaryColor, width: 1.5)),
           child: Text(
-            '69.99',
-            style: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
+            transaction.amount.toString(),
+            style: TextStyle(
+                color: Theme.of(context).primaryColor,
+                fontWeight: FontWeight.bold),
           ),
         ),
         Container(

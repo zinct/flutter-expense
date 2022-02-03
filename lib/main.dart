@@ -14,11 +14,11 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   final List<Transaction> transactions = [
     Transaction(
-        id: 1, name: 'Bought Ice cream', amount: 5000, date: DateTime.now()),
+        id: 1, name: 'Bought Ice cream', amount: 45.01, date: DateTime.now()),
     Transaction(
         id: 2,
         name: 'Pay telkom administrator',
-        amount: 400000,
+        amount: 99.95,
         date: DateTime.now()),
     // Transaction(
     //     id: 2,
@@ -76,6 +76,14 @@ class _AppState extends State<App> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Expense App',
+      theme: ThemeData(
+          primarySwatch: Colors.red,
+          fontFamily: 'Quicksand',
+          appBarTheme: const AppBarTheme(
+              titleTextStyle: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold))),
       home: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
