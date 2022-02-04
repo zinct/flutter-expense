@@ -11,16 +11,15 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 355,
-      child: transactions.isNotEmpty
-          ? ListView.builder(
-              itemCount: transactions.length,
-              itemBuilder: (context, index) =>
-                  TransactionItem(transactions[index]),
-            )
-          : NotFound(
-              margin: EdgeInsets.only(top: 50),
-            ),
-    );
+        height: 355,
+        child: transactions.isNotEmpty
+            ? ListView.builder(
+                itemCount: transactions.length,
+                itemBuilder: (context, index) =>
+                    TransactionItem(transactions[index]),
+              )
+            : NotFound(
+                padding: EdgeInsets.only(top: 50),
+              ));
   }
 }

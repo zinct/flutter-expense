@@ -1,9 +1,11 @@
 import 'package:expense/model/transaction.dart';
 import 'package:expense/transaction/transaction_form.dart';
 import 'package:expense/transaction/transaction_list.dart';
+import 'package:expense/widgets/chart.dart';
 import 'package:expense/widgets/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:expense/transaction/transaction_container.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() => runApp(App());
 
@@ -14,13 +16,16 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final List<Transaction> transactions = [
-    // Transaction(
-    //     id: 1, name: 'Bought Ice cream', amount: 45.01, date: DateTime.now()),
-    // Transaction(
-    //     id: 2,
-    //     name: 'Pay telkom administrator',
-    //     amount: 99.95,
-    //     date: DateTime.now()),
+    Transaction(
+        id: 1,
+        name: 'Bought Ice cream',
+        amount: 45.01,
+        date: DateTime.now().subtract(Duration(days: 2))),
+    Transaction(
+        id: 2,
+        name: 'Pay telkom administrator',
+        amount: 99.95,
+        date: DateTime.now()),
     // Transaction(
     //     id: 2,
     //     name: 'Pay telkom administrator',
@@ -47,6 +52,11 @@ class _AppState extends State<App> {
     //     amount: 400000,
     //     date: DateTime.now()),
   ];
+
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
 
   void _openCreateTransactionModal(BuildContext context) {
     showModalBottomSheet(
@@ -95,17 +105,14 @@ class _AppState extends State<App> {
                   icon: Icon(Icons.add))
             ],
           ),
-          body: Column(
+          body: ListView(
             children: [
-              // Card(
-              //   color: Colors.amber,
-              //   child: Container(
-              //     width: double.infinity,
-              //     height: 100,
-              //     child: Text('Chart'),
-              //   ),
-              // ),
-              TransactionList(transactions),
+              Column(
+                children: [
+                  Chart(transactions: transactions),
+                  TransactionList(transactions),
+                ],
+              )
             ],
           ),
           floatingActionButtonLocation:

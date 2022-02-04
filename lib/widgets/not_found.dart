@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class NotFound extends StatelessWidget {
-  final EdgeInsets margin;
-  NotFound({Key? key, this.margin = const EdgeInsets.all(0)}) : super(key: key);
+  final EdgeInsets padding;
+  NotFound({Key? key, this.padding = const EdgeInsets.all(0)})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin,
+      padding: padding,
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
