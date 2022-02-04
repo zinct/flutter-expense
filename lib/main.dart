@@ -19,13 +19,13 @@ class _AppState extends State<App> {
     Transaction(
         id: 1,
         name: 'Bought Ice cream',
-        amount: 45.01,
+        amount: 10000,
         date: DateTime.now().subtract(Duration(days: 2))),
     Transaction(
         id: 2,
         name: 'Pay telkom administrator',
-        amount: 99.95,
-        date: DateTime.now()),
+        amount: 300000000,
+        date: DateTime.now().subtract(Duration(days: 4))),
     // Transaction(
     //     id: 2,
     //     name: 'Pay telkom administrator',
@@ -105,14 +105,10 @@ class _AppState extends State<App> {
                   icon: Icon(Icons.add))
             ],
           ),
-          body: ListView(
+          body: Column(
             children: [
-              Column(
-                children: [
-                  Chart(transactions: transactions),
-                  TransactionList(transactions),
-                ],
-              )
+              Chart(transactions: transactions),
+              TransactionList(transactions),
             ],
           ),
           floatingActionButtonLocation:
