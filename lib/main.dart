@@ -4,7 +4,6 @@ import 'package:expense/transaction/transaction_list.dart';
 import 'package:expense/widgets/chart.dart';
 import 'package:expense/widgets/not_found.dart';
 import 'package:flutter/material.dart';
-import 'package:expense/transaction/transaction_container.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() => runApp(App());
@@ -82,6 +81,12 @@ class _AppState extends State<App> {
     });
   }
 
+  void _deleteTransaction(int id) {
+    setState(() {
+      transactions.removeWhere((element) => element.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -108,7 +113,7 @@ class _AppState extends State<App> {
           body: Column(
             children: [
               Chart(transactions: transactions),
-              TransactionList(transactions),
+              TransactionList(transactions, _deleteTransaction),
             ],
           ),
           floatingActionButtonLocation:

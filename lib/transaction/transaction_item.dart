@@ -1,53 +1,49 @@
+import 'dart:math';
+
 import 'package:expense/model/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TransactionItem extends StatelessWidget {
-  final Transaction transaction;
+  final Transaction _transaction;
+  final Function()? _onDelete;
 
-  TransactionItem(this.transaction);
+  TransactionItem(this._transaction, this._onDelete);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-          child: Row(
-        children: [
-          Container(
-            width: 80,
-            margin: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-            decoration: BoxDecoration(
-                border: Border.all(
-                    color: Theme.of(context).primaryColor, width: 1.5)),
-            child: FittedBox(
+    return Card(
+      child: ListTile(
+        leading: Container(
+          height: 50,
+          width: 50,
+          decoration: BoxDecoration(
+              border:
+                  Border.all(color: Theme.of(context).primaryColor, width: 2)),
+          child: FittedBox(
               child: Text(
-                'Rp. ${transaction.amount.toString()}',
-                overflow: TextOverflow.clip,
-                style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.bold),
-              ),
+            _transaction.name[0],
+            style: TextStyle(
+              color: Theme.of(context).primaryColor,
+              fontWeight: FontWeight.bold,
             ),
+          )),
+        ),
+        title: Text(
+          _transaction.name,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(DateFormat.yMMMd().format(_transaction.date) +
+            '\nRp. ${_transaction.amount.toString()}'),
+        isThreeLine: true,
+        trailing: IconButton(
+          icon: Icon(
+            Icons.remove_circle_outline,
+            color: Theme.of(context).primaryColor,
           ),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  transaction.name,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  DateFormat.yMMMMd().format(transaction.date),
-                  style: TextStyle(fontSize: 11, color: Colors.grey),
-                ),
-              ],
-            ),
-          )
-        ],
-      )),
+          onPressed: _onDelete,
+        ),
+      ),
     );
   }
 }

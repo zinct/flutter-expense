@@ -23,7 +23,8 @@ class ChartBart extends StatelessWidget {
           height: 65,
           color: Colors.grey[200],
           child: FractionallySizedBox(
-            heightFactor: _spendingAmount / _maxPrice * 1,
+            heightFactor:
+                _spendingAmount > 0 ? _spendingAmount / _maxPrice * 1 : 0,
             alignment: Alignment.bottomCenter,
             child: Container(
               color: Theme.of(context).primaryColor,
