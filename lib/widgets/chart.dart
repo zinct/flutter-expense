@@ -9,7 +9,7 @@ class Chart extends StatelessWidget {
   List<Map<String, Object>> get _recentTransactions {
     DateTime week = DateTime.now().subtract(Duration(days: 7));
 
-    return List.generate(7, (index) {
+    return List.from(List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index + 1));
 
       double total = 0;
@@ -21,7 +21,7 @@ class Chart extends StatelessWidget {
       }
 
       return {'name': DateFormat.E('id_ID').format(weekDay), 'total': total};
-    });
+    }).reversed);
   }
 
   double get _maxPrice {

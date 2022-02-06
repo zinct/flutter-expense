@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
   final Function _onSubmit;
@@ -12,12 +13,30 @@ class TransactionForm extends StatefulWidget {
 class _TransactionFormState extends State<TransactionForm> {
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _date;
 
   void _handleSubmit() {
     widget._onSubmit(
-        _nameController.text, double.parse(_amountController.text));
+      _nameController.text,
+      double.parse(_amountController.text),
+      _date,
+    );
 
     Navigator.of(context).pop();
+  }
+
+  void _showDatePicker() {
+    final DateTime currentTime = DateTime.now();
+    showDatePicker(
+      context: context,
+      initialDate: _date ?? DateTime.now(),
+      firstDate: DateTime(2021),
+      lastDate: DateTime(currentTime.year + 3),
+    ).then((value) {
+      setState(() {
+        _date = value;
+      });
+    });
   }
 
   @override
@@ -27,7 +46,7 @@ class _TransactionFormState extends State<TransactionForm> {
       child: Container(
         padding: EdgeInsets.all(20),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               decoration: InputDecoration(labelText: 'Enter name...'),
@@ -40,7 +59,15 @@ class _TransactionFormState extends State<TransactionForm> {
               keyboardType: TextInputType.numberWithOptions(signed: true),
               onSubmitted: (_) => _handleSubmit,
             ),
+            SizedBox(
+              height: 10,
+            ),
             TextButton(
+                onPressed: _showDatePicker,
+                child: Text(_date == null
+                    ? 'Pick date'
+                    : DateFormat.yMd().format(_date!))),
+            ElevatedButton(
                 onPressed: _handleSubmit, child: Text('Create Transaction'))
           ],
         ),

@@ -6,14 +6,14 @@ import 'package:expense/widgets/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-void main() => runApp(App());
+void main() => runApp(MyApp());
 
-class App extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  State<App> createState() => _AppState();
+  State<MyApp> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<MyApp> {
   final List<Transaction> transactions = [
     Transaction(
         id: 1,
@@ -67,14 +67,15 @@ class _AppState extends State<App> {
         });
   }
 
-  void _createTransaction(String name, double amount) {
+  void _createTransaction(String name, double amount, DateTime date) {
     if (name.isEmpty && amount is String && amount <= 0) return;
 
     final newTransaction = Transaction(
-        id: transactions.length + 1,
-        name: name,
-        amount: amount,
-        date: DateTime.now());
+      id: transactions.length + 1,
+      name: name,
+      amount: amount,
+      date: date,
+    );
 
     setState(() {
       transactions.add(newTransaction);
@@ -93,21 +94,25 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       title: 'Expense App',
       theme: ThemeData(
-          primarySwatch: Colors.red,
-          fontFamily: 'Quicksand',
-          appBarTheme: const AppBarTheme(
-              titleTextStyle: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold))),
+        primarySwatch: Colors.red,
+        fontFamily: 'Quicksand',
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       home: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
             title: const Text('Expense APP'),
             actions: [
               IconButton(
-                  onPressed: () => _openCreateTransactionModal(context),
-                  icon: Icon(Icons.add))
+                onPressed: () => _openCreateTransactionModal(context),
+                icon: Icon(Icons.add),
+              )
             ],
           ),
           body: Column(
